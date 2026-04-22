@@ -162,3 +162,88 @@ for i in range(len(mean_freqs)):
 ```
 <img width="545" height="232" alt="image" src="https://github.com/user-attachments/assets/2a32bff6-4856-4b5f-985c-a934aa50811e" />
 <img width="850" height="471" alt="image" src="https://github.com/user-attachments/assets/9ebffb61-b54e-47ec-a18a-c7a5f9196f6d" />
+
+
+<h1 align="center"><i><b>𝐏𝐚𝐫𝐭𝐞 C 𝐝𝐞𝐥 𝐥𝐚𝐛𝐨𝐫𝐚𝐭𝐨𝐫𝐢𝐨</b></i></h1>
+
+```python
+fft_results = []
+
+for (start, end) in segments_limpios:
+    seg = filtered[start:end]
+    if len(seg) == 0:
+        continue
+
+    N = len(seg)
+    fft_vals = np.abs(np.fft.rfft(seg))
+    freqs = np.fft.rfftfreq(N, 1/fs)
+
+    fft_results.append((freqs, fft_vals))
+
+print("FFT calculadas:", len(fft_results))
+
+# =========================
+# 7. ESPECTROS (ROSADO + PICO)
+# =========================
+if len(fft_results) > 0:
+    n = len(fft_results)
+    cols = 3
+    rows = math.ceil(n / cols)
+
+    plt.figure(figsize=(15,10))
+
+    for i, (freqs, fft_vals) in enumerate(fft_results):
+        idx = np.argmax(fft_vals)
+
+        plt.subplot(rows, cols, i+1)
+        plt.plot(freqs, fft_vals, color='deeppink')
+        plt.plot(freqs[idx], fft_vals[idx], 'ko')
+        plt.xlim(0,500)
+        plt.title(f"Contracción {i+1}")
+        plt.grid()
+
+    plt.tight_layout()
+    plt.show()
+
+```
+
+<img width="985" height="297" alt="image" src="https://github.com/user-attachments/assets/8352bdd5-941f-4cee-b310-16697a413f21" />
+
+
+```python
+
+if len(fft_results) > 1:
+    plt.figure(figsize=(10,5))
+
+    f1, fft1 = fft_results[0]
+    f2, fft2 = fft_results[-1]
+
+    plt.plot(f1, fft1, color='dimgray', linewidth=2, label='Inicio')
+    plt.plot(f2, fft2, color='deeppink', linewidth=3, label='Fatiga')
+
+    plt.xlim(0,500)
+    plt.xlabel("Frecuencia (Hz)")
+    plt.ylabel("Magnitud")
+    plt.title("Comparación espectral")
+    plt.legend()
+    plt.grid()
+    plt.show()
+```
+
+<img width="881" height="471" alt="image" src="https://github.com/user-attachments/assets/883e01e7-bf70-416d-8d93-b73326836313" />
+
+
+```python
+if len(fft_results) > 0:
+    picos = [f[np.argmax(fft)] for f, fft in fft_results]
+
+    plt.figure(figsize=(8,5))
+    plt.plot(picos, color='deeppink', marker='o', linewidth=2)
+
+    plt.title("Desplazamiento del pico espectral")
+    plt.xlabel("Contracción")
+    plt.ylabel("Hz")
+    plt.grid()
+    plt.show()
+```
+<img width="695" height="470" alt="image" src="https://github.com/user-attachments/assets/01bb3ca1-297e-4679-a8c6-505b37a7dd5d" />
