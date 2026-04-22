@@ -247,3 +247,13 @@ if len(fft_results) > 0:
     plt.show()
 ```
 <img width="695" height="470" alt="image" src="https://github.com/user-attachments/assets/01bb3ca1-297e-4679-a8c6-505b37a7dd5d" />
+
+<h1 align="center"><i><b>**Conclusiones**𝐨</b></i></h1>
+
+**Comparación espectral:**
+
+Al comparar los espectros de las primeras y últimas contracciones, se observa una disminución del contenido de altas frecuencias en las contracciones finales. Además, el espectro presenta un desplazamiento hacia frecuencias más bajas, lo cual es característico del fenómeno de fatiga muscular.
+
+**Reducción de alta frecuencia:**
+
+La reducción de componentes de alta frecuencia se asocia con la disminución en la velocidad de conducción de las fibras musculares durante la fatiga.
