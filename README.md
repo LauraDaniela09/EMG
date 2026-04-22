@@ -248,9 +248,7 @@ if len(fft_results) > 0:
 ```
 <img width="695" height="470" alt="image" src="https://github.com/user-attachments/assets/01bb3ca1-297e-4679-a8c6-505b37a7dd5d" />
 
-<h1 align="center"><i><b>```markdown
-**Conclusiones:**
- ```</b></i></h1>
+<h1 align="center"><i><b>__Conclusiones__</b></i></h1>
 
 **Comparación espectral:**
 
