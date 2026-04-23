@@ -24,6 +24,84 @@ y las funciones  `butter `,  `filtfilt ` y  `welch ` del módulo  `scipy.signal 
 
 <h1 align="center"><i><b>𝐏𝐚𝐫𝐭𝐞 A 𝐝𝐞𝐥 𝐥𝐚𝐛𝐨𝐫𝐚𝐭𝐨𝐫𝐢𝐨</b></i></h1>
 
+**visualizacion de la señal**
+
+```python
+ ==============================
+# RECORTE AUTOMÁTICO (ZONA ÚTIL)
+# ==============================
+if len(segments) > 0:
+    inicio = max(0, segments[0][0] - int(1*fs))
+    fin = min(len(emg_filt), segments[-1][1] + int(1*fs))
+else:
+    inicio = 0
+    fin = len(emg_filt)
+
+# ==============================
+# GRÁFICA PRINCIPAL MEJORADA
+# ==============================
+plt.figure(figsize=(14,5))
+
+# Señal EMG (más fina)
+plt.plot(t[inicio:fin], emg_filt[inicio:fin],
+         color='black', linewidth=1, label='Señal EMG')
+
+# Envolvente (más visible)
+plt.plot(t[inicio:fin], envelope_smooth[inicio:fin],
+         color='magenta', linewidth=2, label='Envolvente suavizada')
+
+# ==============================
+# SOMBREADO DE CONTRACCIONES
+# ==============================
+for (start, end) in segments:
+    if start >= inicio and end <= fin:
+        plt.axvspan(t[start], t[end],
+                    color='purple', alpha=0.25)
+
+# ==============================
+# ESTILO FINAL
+# ==============================
+plt.title("Contracciones musculares detectadas (EMG)")
+plt.xlabel("Tiempo (s)")
+plt.ylabel("Amplitud")
+plt.legend()
+plt.grid(alpha=0.3)
+
+plt.show()
+```
+<img width="1167" height="470" alt="image" src="https://github.com/user-attachments/assets/c9a49069-6354-4674-bf4e-e83884891bd4" />
+
+Esta parte del código se encarga de mostrar de forma individual las contracciones musculares detectadas en la señal electromiográfica (EMG).
+Primero, se define un margen de 200 milisegundos antes y después de cada contracción (`margen = int(0.2 * fs)`) para visualizar con mayor detalle el inicio y el final de cada una. Luego, se seleccionan las cinco primeras contracciones (`regiones = regiones[:5]`) con el fin de limitar el número de gráficas generadas.
+
+Mediante un ciclo `for`, el programa recorre cada contracción detectada y genera una figura independiente. En cada una, se grafica la señal EMG en color fucsia, representando la variación de amplitud del músculo durante la contracción, mientras que el intervalo correspondiente a la actividad muscular se resalta con un sombreado lila para identificar claramente el momento de la contracción.
+
+```python
+for i, (s, e) in enumerate(segments):
+
+    m = int(0.2 * fs)
+
+    s2 = max(0, s - m)
+    e2 = min(len(emg_filt), e + m)
+
+    plt.figure(figsize=(10,3))
+    plt.plot(t[s2:e2], envelope_smooth[s2:e2], color='black')
+
+    plt.axvspan(t[s], t[e], color='purple', alpha=0.25)
+
+    plt.title(f"Contracción {i+1}")
+    plt.xlabel("Tiempo (s)")
+    plt.ylabel("Amplitud")
+    plt.grid(alpha=0.3)
+    plt.show()
+```
+
+<img width="855" height="316" alt="image" src="https://github.com/user-attachments/assets/9b829bd4-245d-4221-bf3e-62b9944ad301" />
+<img width="870" height="316" alt="image" src="https://github.com/user-attachments/assets/549f3e7f-de91-441f-8a44-2dc9de80b2b4" />
+<img width="855" height="316" alt="image" src="https://github.com/user-attachments/assets/7655c05f-1d78-4cca-a067-8e6dbd8fbfcb" />
+<img width="855" height="316" alt="image" src="https://github.com/user-attachments/assets/bc0987ee-3b7d-45bb-bae6-5bd99dda898f" />
+<img width="855" height="316" alt="image" src="https://github.com/user-attachments/assets/85ea867b-eb98-4c5d-9b1e-cacf098f17a4" />
+
 
 <h1 align="center"><i><b>𝐏𝐚𝐫𝐭𝐞 B 𝐝𝐞𝐥 𝐥𝐚𝐛𝐨𝐫𝐚𝐭𝐨𝐫𝐢𝐨</b></i></h1>
 
