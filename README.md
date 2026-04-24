@@ -23,6 +23,8 @@ Esa parte del código muestra la importación de librerías necesarias para el p
 y las funciones  `butter `,  `filtfilt ` y  `welch ` del módulo  `scipy.signal ` para aplicar filtros digitales y obtener el análisis espectral de la señal.
 
 <h1 align="center"><i><b>𝐏𝐚𝐫𝐭𝐞 A 𝐝𝐞𝐥 𝐥𝐚𝐛𝐨𝐫𝐚𝐭𝐨𝐫𝐢𝐨</b></i></h1>
+<img width="515" height="1600" alt="image" src="https://github.com/user-attachments/assets/cca4890f-1d63-4e6c-b4b6-e846a4ff8962" />
+
 
 **visualizacion de la señal**
 
@@ -397,3 +399,12 @@ Al comparar los espectros de las primeras y últimas contracciones, se observa u
 **Reducción de alta frecuencia:**
 
 La reducción de componentes de alta frecuencia se asocia con la disminución en la velocidad de conducción de las fibras musculares durante la fatiga.
+
+El desarrollo de la práctica permitió procesar y analizar señales electromiográficas emuladas y reales mediante herramientas de segmentación, filtrado y análisis en frecuencia. A partir de este procedimiento fue posible identificar las contracciones musculares, aislar cada segmento de interés y estudiar su comportamiento espectral de manera individual, lo que facilitó una evaluación más clara del fenómeno de fatiga muscular.
+
+La aplicación del filtro pasabanda entre 20 y 450 Hz mejoró la calidad de la señal EMG, ya que permitió atenuar componentes no deseadas y resaltar con mayor claridad la actividad muscular útil para el análisis. Gracias a este preprocesamiento, la detección de picos y la segmentación por contracciones pudieron realizarse de forma más confiable, haciendo más consistente el cálculo posterior de los parámetros frecuenciales. El cálculo de la frecuencia media y la frecuencia mediana en cada contracción permitió cuantificar los cambios progresivos en el contenido frecuencial de la señal. Estos parámetros resultaron útiles para comparar el comportamiento entre contracciones sucesivas y evidenciar la evolución de la fatiga, ya que muestran cómo la distribución espectral cambia a medida que el músculo se somete a esfuerzo repetido.
+
+El análisis espectral mediante FFT mostró que las contracciones finales presentan una reducción del contenido de altas frecuencias respecto a las contracciones iniciales. Además, el desplazamiento del pico espectral hacia valores más bajos confirmó una tendencia compatible con la aparición de fatiga muscular, lo que demuestra que el dominio de la frecuencia aporta información relevante para interpretar el estado funcional del músculo durante el esfuerzo sostenido
+La comparación entre señal emulada y señal real permitió reconocer que, aunque la señal emulada es útil para comprender el procedimiento de análisis y validar la metodología, la señal real introduce variaciones fisiológicas y experimentales que enriquecen la interpretación de los resultados. Esto evidencia la importancia de combinar ejercicios de simulación con registros reales para desarrollar criterios más sólidos en el procesamiento de señales biomédicas.
+
+En términos generales, la práctica confirmó que las técnicas de procesamiento digital de señales son una herramienta efectiva para estudiar la fatiga muscular a partir de registros EMG. La visualización de contracciones, el filtrado, la segmentación y el análisis espectral permitieron transformar una señal biológica compleja en información interpretable, útil para aplicaciones académicas y potencialmente valiosa en contextos clínicos, deportivos y de rehabilitación.
