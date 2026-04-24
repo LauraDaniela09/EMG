@@ -102,6 +102,64 @@ for i, (s, e) in enumerate(segments):
 <img width="855" height="316" alt="image" src="https://github.com/user-attachments/assets/bc0987ee-3b7d-45bb-bae6-5bd99dda898f" />
 <img width="855" height="316" alt="image" src="https://github.com/user-attachments/assets/85ea867b-eb98-4c5d-9b1e-cacf098f17a4" />
 
+**calculo de frecuencia media y mediana**
+
+```python
+from scipy.signal import welch
+
+def calc_freq(seg, fs):
+    f, Pxx = welch(seg, fs=fs, nperseg=min(256, len(seg)))
+
+    if np.sum(Pxx) == 0:
+        return np.nan, np.nan
+
+    f_media = np.sum(f * Pxx) / np.sum(Pxx)
+
+    cumsum = np.cumsum(Pxx)
+    idx = np.where(cumsum >= cumsum[-1]/2)[0]
+
+    f_mediana = f[idx[0]] if len(idx) > 0 else np.nan
+
+    return f_media, f_mediana
+
+# calcular para cada contracción
+resultados = []
+
+for i, (ini, fin) in enumerate(segments[:5]):
+    seg = signal_f[ini:fin]
+    fm, fmed = calc_freq(seg, fs)
+    resultados.append((i+1, fm, fmed))
+
+import pandas as pd
+df = pd.DataFrame(resultados, columns=["Contracción", "F_media", "F_mediana"])
+print(df)
+```
+Este código calcula la frecuencia media y mediana de cada contracción detectada en la señal EMG. Primero, se utilizan las librerías `scipy.signal`, `numpy` y `pandas` para procesar los datos. Dentro de un ciclo `for`, se recorre cada contracción y se aplica el método de Welch para obtener el espectro de potencia de la señal, representado por las frecuencias (`f`) y su energía (`Pxx`). Luego, se normaliza el espectro para calcular la frecuencia media, que indica el promedio ponderado de las frecuencias, y la frecuencia mediana, que marca el punto donde se concentra el 50 % de la energía total. Finalmente, los resultados se organizan en una tabla que muestra, para cada contracción muscular, los valores obtenidos de ambas frecuencias, facilitando el análisis de la variación en el contenido espectral de la señal.
+
+<img width="354" height="131" alt="Captura de pantalla 2026-04-23 201203" src="https://github.com/user-attachments/assets/7c7ab969-9191-41ba-b92d-42374c65a4d2" />
+
+
+**analisis de las frecuencias**
+
+Al analizar la evolución de la frecuencia media y la frecuencia mediana a lo largo de las contracciones simuladas, se observa que ambas se mantienen prácticamente constantes, sin variaciones significativas entre una contracción y otra. La frecuencia media presenta valores entre 11.58 Hz y 11.61 Hz, mientras que la frecuencia mediana se mantiene alrededor de 7.58 Hz a 7.60 Hz. Esta estabilidad indica que no hay evidencia de fatiga muscular simulada, ya que en una señal EMG real la frecuencia mediana tiende a disminuir progresivamente con el tiempo cuando existe fatiga. Por lo tanto, los resultados obtenidos sugieren que las contracciones analizadas corresponden a una actividad muscular constante y controlada, sin cambios notables en las características espectrales de la señal.
+
+```python
+plt.figure()
+
+plt.plot(df["Contracción"], df["F_media"], marker='o', color='#e91e63', label="Media")
+plt.plot(df["Contracción"], df["F_mediana"], marker='s', color='#6e6e6e', label="Mediana")
+
+plt.title("Evolución de frecuencias")
+plt.xlabel("Contracción")
+plt.ylabel("Frecuencia (Hz)")
+plt.legend()
+plt.grid()
+
+plt.show()
+```
+
+<img width="571" height="455" alt="image" src="https://github.com/user-attachments/assets/0d60eaa6-1e09-4e1a-a999-edfbbe18c6d8" />
+
 
 <h1 align="center"><i><b>𝐏𝐚𝐫𝐭𝐞 B 𝐝𝐞𝐥 𝐥𝐚𝐛𝐨𝐫𝐚𝐭𝐨𝐫𝐢𝐨</b></i></h1>
 
