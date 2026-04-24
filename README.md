@@ -170,7 +170,9 @@ plt.show()
 
 
 <h1 align="center"><i><b>𝐏𝐚𝐫𝐭𝐞 B 𝐝𝐞𝐥 𝐥𝐚𝐛𝐨𝐫𝐚𝐭𝐨𝐫𝐢𝐨</b></i></h1>
-
+<p align="center">
+<img width="941" height="1672" alt="image" src="https://github.com/user-attachments/assets/2408aebb-5041-4c8a-b014-e0652e3ebfe2" />
+</p>
 Se define y diseña un filtro pasabanda tipo butterworth para usar más adelante.
 ```python
 plt.figure(figsize=(18,5))
