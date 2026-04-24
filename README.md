@@ -23,7 +23,9 @@ Esa parte del código muestra la importación de librerías necesarias para el p
 y las funciones  `butter `,  `filtfilt ` y  `welch ` del módulo  `scipy.signal ` para aplicar filtros digitales y obtener el análisis espectral de la señal.
 
 <h1 align="center"><i><b>𝐏𝐚𝐫𝐭𝐞 A 𝐝𝐞𝐥 𝐥𝐚𝐛𝐨𝐫𝐚𝐭𝐨𝐫𝐢𝐨</b></i></h1>
+<p align="center">
 <img width="515" height="1600" alt="image" src="https://github.com/user-attachments/assets/cca4890f-1d63-4e6c-b4b6-e846a4ff8962" />
+</p>
 
 
 **visualizacion de la señal**
