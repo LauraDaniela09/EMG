@@ -69,6 +69,7 @@ plt.grid(alpha=0.3)
 
 plt.show()
 ```
+
 <img width="1167" height="470" alt="image" src="https://github.com/user-attachments/assets/c9a49069-6354-4674-bf4e-e83884891bd4" />
 
 Esta parte del código se encarga de mostrar de forma individual las contracciones musculares detectadas en la señal electromiográfica (EMG).
@@ -139,9 +140,11 @@ Este código calcula la frecuencia media y mediana de cada contracción detectad
 <img width="354" height="131" alt="Captura de pantalla 2026-04-23 201203" src="https://github.com/user-attachments/assets/7c7ab969-9191-41ba-b92d-42374c65a4d2" />
 
 
+
 **analisis de las frecuencias**
 
 Al analizar la evolución de la frecuencia media y la frecuencia mediana a lo largo de las contracciones simuladas, se observa que ambas se mantienen prácticamente constantes, sin variaciones significativas entre una contracción y otra. La frecuencia media presenta valores entre 11.58 Hz y 11.61 Hz, mientras que la frecuencia mediana se mantiene alrededor de 7.58 Hz a 7.60 Hz. Esta estabilidad indica que no hay evidencia de fatiga muscular simulada, ya que en una señal EMG real la frecuencia mediana tiende a disminuir progresivamente con el tiempo cuando existe fatiga. Por lo tanto, los resultados obtenidos sugieren que las contracciones analizadas corresponden a una actividad muscular constante y controlada, sin cambios notables en las características espectrales de la señal.
+
 
 ```python
 plt.figure()
